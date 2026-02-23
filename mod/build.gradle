@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'fabric-loom' version '1.14.10'
+}
+
+version = '1.0.0'
+group = 'com.cmd'
+
+// 无需access widener配置
+loom {
+}
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    mavenCentral()
+    maven { url 'https://maven.fabricmc.net/' }
+}
+
+dependencies {
+    // Minecraft核心依赖（loom会自动处理重映射）
+    minecraft "com.mojang:minecraft:1.20.1"
+    mappings "net.fabricmc:yarn:1.20.1+build.1:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.15.11"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.92.7+1.20.1"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release = 21
+    // 屏蔽过期API警告
+    options.compilerArgs.add("-Xlint:-deprecation")
+}
+
+// 关键：删除自定义jar任务，使用loom的remapJar（Fabric模组必须用这个）
+// 让build任务依赖remapJar，生成重映射后的合法jar包
+build.dependsOn remapJar
+
+// 可选：设置remapJar的输出名称，方便识别
+tasks.named('remapJar') {
+    archiveBaseName = 'mc2cmd'
+    archiveVersion = '1.0.0'
+    archiveClassifier = ''
+}
