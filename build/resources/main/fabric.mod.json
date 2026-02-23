@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "mc2cmd",
+  "version": "1.0.0",
+  "icon": "assets/mc2cmd/icon.png",
+  "name": "MC2CMD",
+  "description": "在MC中执行系统CMD命令（管理员权限）",
+  "authors": ["ChenShuo"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": ["com.cmd.SysCmd"]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "~1.20.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "cover": "mc2cmd:textures/gui/mod_menu/cover.png"
+    }
+  }
+}
