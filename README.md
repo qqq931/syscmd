@@ -1,8 +1,8 @@
 MC2CMD
 轻量级 Minecraft CMD 执行模组 | Lightweight In-Game CMD Execution Mod
-版本 Version: 1.10.0适用版本 Minecraft: 1.20.1加载器 Loader: Fabric模组体积 Size: 7.98KB多语言支持 Languages: 10 种主流语言 | 10 Mainstream Languages
+版本 Version: 1.10.0适用版本 Minecraft: 1.20.1加载器 Loader: Fabric模组体积 Size: 不足0.01MB 多语言支持 Languages: 10 种主流语言 | 10 Mainstream Languages
 简介 | Introduction
-MC2CMD 是一款极致轻量的 Fabric 模组，让你无需退出《我的世界》，即可在游戏内直接执行 Windows CMD 命令，支持普通权限与管理员权限双模式。模组体积不足 8KB，加载零延迟，与 100 + 模组共存无冲突，完美适配大型整合包。
+MC2CMD 是一款极致轻量的 Fabric 模组，让你无需退出《我的世界》，即可在游戏内直接执行 Windows CMD 命令，支持普通权限与管理员权限双模式。模组体积不足 0.01MB，加载零延迟，与 100 + 模组共存无冲突，完美适配大型整合包。
 MC2CMD is an ultra-lightweight Fabric mod that allows you to execute Windows CMD commands directly in Minecraft without exiting the game, supporting both normal and administrator permission modes. With a size of less than 8KB, it loads instantly, has no conflicts with 100+ mods, and is fully compatible with large modpacks.
 核心功能 | Core Features
 双指令体系：提供普通权限与管理员权限两种执行方式，满足不同操作需求。
@@ -14,7 +14,7 @@ MC2CMD is an ultra-lightweight Fabric mod that allows you to execute Windows CMD
 表格
 语言 Language	代码 Code	语言 Language	代码 Code
 简体中文	zh_cn	德语	de_de
-英语（兜底）	en_us	法语	fr_fr
+英语（无语言默认）	en_us	法语	fr_fr
 日语	ja_jp	西班牙语	es_es
 韩语	ko_kr	葡萄牙语（巴西）	pt_br
 俄语	ru_ru	意大利语	it_it
