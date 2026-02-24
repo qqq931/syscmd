@@ -1,7 +1,5 @@
-// 包名严格匹配路径：com.cmd
 package com.cmd;
 
-// 1.20.1版本正确的导入（无笔误、全适配）
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.api.ModInitializer;
@@ -10,48 +8,118 @@ import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-// 类名 = 文件名：SysCmd（公共类必须和文件名一致）
 public class SysCmd implements ModInitializer {
-    // 模组ID（和fabric.mod.json里的id一致）
     public static final String MOD_ID = "mc2cmd";
+    public static final String MOD_VERSION = "1.10.0";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
-        // 注册/cmd命令（Fabric API v2，适配1.20.1）
-        CommandRegistrationCallback.EVENT.register(this::registerCmdCommand);
+        LOGGER.info("MC2CMD v{} 已启动 - CMD + PowerShell 双支持", MOD_VERSION);
+        CommandRegistrationCallback.EVENT.register(this::registerAllCommands);
     }
 
-    // 命令注册方法（参数无笔误、类型全正确）
-    private void registerCmdCommand(
+    private void registerAllCommands(
             CommandDispatcher<ServerCommandSource> dispatcher,
             CommandRegistryAccess registryAccess,
             CommandManager.RegistrationEnvironment environment
     ) {
-        // 注册/cmd命令，仅管理员可执行
-        dispatcher.register(
-                CommandManager.literal("cmd")
-                        .requires(source -> source.hasPermissionLevel(4)) // 管理员权限
-                        .then(CommandManager.argument("command", StringArgumentType.greedyString())
-                                .executes(ctx -> {
-                                    ServerCommandSource source = ctx.getSource();
-                                    String cmd = StringArgumentType.getString(ctx, "command");
 
-                                    try {
-                                        // 转义特殊字符，避免执行失败
-                                        String safeCmd = cmd.replace("\"", "\\\"").replace("&", "^&");
-                                        // 以管理员执行CMD命令
-                                        Runtime.getRuntime().exec(
-                                                "powershell -Command Start-Process cmd.exe -ArgumentList '/c " + safeCmd + "' -Verb RunAs"
-                                        );
-                                        source.sendFeedback(() -> Text.literal("§a✅ 已请求管理员执行: " + cmd), false);
-                                    } catch (Exception e) {
-                                        source.sendFeedback(() -> Text.literal("§c❌ 执行失败: " + e.getMessage()), false);
-                                        e.printStackTrace(); // 控制台打印异常，方便调试
-                                    }
-                                    return 1;
-                                })
-                        )
+        // ======================
+        // 原版 CMD 指令（不动）
+        // ======================
+        dispatcher.register(
+            CommandManager.literal("cmd")
+                .requires(source -> source.hasPermissionLevel(4))
+                .then(CommandManager.argument("command", StringArgumentType.greedyString())
+                    .executes(ctx -> {
+                        ServerCommandSource source = ctx.getSource();
+                        String cmd = StringArgumentType.getString(ctx, "command");
+                        try {
+                            String safeCmd = cmd.replace("\"", "\\\"").replace("&", "^&");
+                            Runtime.getRuntime().exec("cmd.exe /c " + safeCmd);
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmd.success", cmd), false);
+                        } catch (Exception e) {
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmd.error", e.getMessage()), false);
+                            e.printStackTrace();
+                        }
+                        return 1;
+                    })
+                )
+        );
+
+        dispatcher.register(
+            CommandManager.literal("cmdadmin")
+                .requires(source -> source.hasPermissionLevel(4))
+                .then(CommandManager.argument("command", StringArgumentType.greedyString())
+                    .executes(ctx -> {
+                        ServerCommandSource source = ctx.getSource();
+                        String cmd = StringArgumentType.getString(ctx, "command");
+                        try {
+                            String safeCmd = cmd.replace("\"", "\\\"").replace("&", "^&");
+                            Runtime.getRuntime().exec(
+                                "powershell -Command Start-Process cmd.exe -ArgumentList '/c " + safeCmd + "' -Verb RunAs"
+                            );
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmdadmin.success", cmd), false);
+                        } catch (Exception e) {
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmdadmin.error", e.getMessage()), false);
+                            e.printStackTrace();
+                        }
+                        return 1;
+                    })
+                )
+        );
+
+        // ======================
+        // 新增：PowerShell 指令
+        // ======================
+        dispatcher.register(
+            CommandManager.literal("ps")
+                .requires(source -> source.hasPermissionLevel(4))
+                .then(CommandManager.argument("command", StringArgumentType.greedyString())
+                    .executes(ctx -> {
+                        ServerCommandSource source = ctx.getSource();
+                        String cmd = StringArgumentType.getString(ctx, "command");
+                        try {
+                            String safeCmd = cmd.replace("\"", "\\\"");
+                            // 直接用 PowerShell 执行
+                            Runtime.getRuntime().exec("powershell.exe -Command " + safeCmd);
+                            // 直接复用你现有的多语言键，不用加新翻译！
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmd.success", cmd), false);
+                        } catch (Exception e) {
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmd.error", e.getMessage()), false);
+                            e.printStackTrace();
+                        }
+                        return 1;
+                    })
+                )
+        );
+
+        dispatcher.register(
+            CommandManager.literal("psadmin")
+                .requires(source -> source.hasPermissionLevel(4))
+                .then(CommandManager.argument("command", StringArgumentType.greedyString())
+                    .executes(ctx -> {
+                        ServerCommandSource source = ctx.getSource();
+                        String cmd = StringArgumentType.getString(ctx, "command");
+                        try {
+                            String safeCmd = cmd.replace("\"", "\\\"");
+                            // 管理员 PowerShell
+                            Runtime.getRuntime().exec(
+                                "powershell -Command Start-Process powershell.exe -ArgumentList '-Command \"" + safeCmd + "\"' -Verb RunAs"
+                            );
+                            // 复用现有语言
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmdadmin.success", cmd), false);
+                        } catch (Exception e) {
+                            source.sendFeedback(() -> Text.translatable("mc2cmd.cmdadmin.error", e.getMessage()), false);
+                            e.printStackTrace();
+                        }
+                        return 1;
+                    })
+                )
         );
     }
 }

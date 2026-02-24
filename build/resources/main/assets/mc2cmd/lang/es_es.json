@@ -1,0 +1,6 @@
+{
+  "mc2cmd.cmd.success": "✅ Ejecutado con permisos normales: %s",
+  "mc2cmd.cmd.error": "❌ Error en la ejecución: %s",
+  "mc2cmd.cmdadmin.success": "✅ Solicitada ejecución como administrador: %s",
+  "mc2cmd.cmdadmin.error": "❌ Error en la ejecución: %s"
+}

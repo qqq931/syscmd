@@ -1,0 +1,6 @@
+{
+  "mc2cmd.cmd.success": "✅ Exécuté avec droits normaux: %s",
+  "mc2cmd.cmd.error": "❌ Échec de l'exécution: %s",
+  "mc2cmd.cmdadmin.success": "✅ Demande d'exécution admin: %s",
+  "mc2cmd.cmdadmin.error": "❌ Échec de l'exécution: %s"
+}

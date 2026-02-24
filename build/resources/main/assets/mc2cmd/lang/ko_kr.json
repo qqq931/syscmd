@@ -1,0 +1,6 @@
+{
+  "mc2cmd.cmd.success": "✅ 일반 권한으로 실행: %s",
+  "mc2cmd.cmd.error": "❌ 실행 실패: %s",
+  "mc2cmd.cmdadmin.success": "✅ 관리자 권한 실행 요청: %s",
+  "mc2cmd.cmdadmin.error": "❌ 실행 실패: %s"
+}

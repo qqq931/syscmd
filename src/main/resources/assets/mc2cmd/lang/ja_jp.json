@@ -1,0 +1,6 @@
+{
+  "mc2cmd.cmd.success": "✅ 通常権限で実行: %s",
+  "mc2cmd.cmd.error": "❌ 実行に失敗しました: %s",
+  "mc2cmd.cmdadmin.success": "✅ 管理者権限実行をリクエスト: %s",
+  "mc2cmd.cmdadmin.error": "❌ 実行に失敗しました: %s"
+}

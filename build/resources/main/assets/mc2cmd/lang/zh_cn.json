@@ -1,0 +1,6 @@
+{
+  "mc2cmd.cmd.success": "§a✅ 普通权限执行: %s",
+  "mc2cmd.cmd.error": "§c❌ 执行失败: %s",
+  "mc2cmd.cmdadmin.success": "§a✅ 已请求管理员执行: %s",
+  "mc2cmd.cmdadmin.error": "§c❌ 执行失败: %s"
+}

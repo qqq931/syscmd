@@ -1,0 +1,6 @@
+{
+  "mc2cmd.cmd.success": "✅ Выполнено с обычными правами: %s",
+  "mc2cmd.cmd.error": "❌ Ошибка выполнения: %s",
+  "mc2cmd.cmdadmin.success": "✅ Запрошена выполнение от админа: %s",
+  "mc2cmd.cmdadmin.error": "❌ Ошибка выполнения: %s"
+}
