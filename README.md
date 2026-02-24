@@ -34,6 +34,7 @@ minecraft
 将 mc2cmd-1.10.0.jar 放入游戏目录下的 mods 文件夹；
 启动游戏，模组自动加载生效。
 注意事项 | Notes
+3. 
 仅支持 Windows 系统，Linux/Mac 系统暂不兼容；
 管理员权限指令会弹出系统 UAC 授权窗口，需手动确认；
 请谨慎执行高危 CMD 命令（如格式化、删除系统文件），避免造成数据丢失；
@@ -42,4 +43,3 @@ minecraft
 杨晨硕 (YangChenshuo)
 许可证 | License
 MIT License
-3. 
