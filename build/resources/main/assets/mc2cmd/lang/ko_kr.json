@@ -1,6 +1,9 @@
 {
-  "mc2cmd.cmd.success": "✅ 일반 권한으로 실행: %s",
-  "mc2cmd.cmd.error": "❌ 실행 실패: %s",
-  "mc2cmd.cmdadmin.success": "✅ 관리자 권한 실행 요청: %s",
-  "mc2cmd.cmdadmin.error": "❌ 실행 실패: %s"
+  "mc2cmd.success": "§a✅ 명령이 성공적으로 실행되었습니다: %s",
+  "mc2cmd.error": "§c❌ 실행 실패: %s",
+  "mc2cmd.admin.request": "§6🔓 관리자 권한 실행을 요청했습니다: %s",
+  "mc2cmd.rate.limit": "§c⏱️ 실행 빈도가 너무 높습니다. 나중에 다시 시도하세요",
+  "mc2cmd.whitelist.blocked": "§c🚫 명령어가 허용 목록에 없습니다",
+  "mc2cmd.timeout": "§c⏱️ 명령 실행 시간 초과",
+  "mc2cmd.exit.code": "§e⚠️ 실행 완료, 종료 코드: %d"
 }

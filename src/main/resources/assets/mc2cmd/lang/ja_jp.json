@@ -1,6 +1,9 @@
 {
-  "mc2cmd.cmd.success": "✅ 通常権限で実行: %s",
-  "mc2cmd.cmd.error": "❌ 実行に失敗しました: %s",
-  "mc2cmd.cmdadmin.success": "✅ 管理者権限実行をリクエスト: %s",
-  "mc2cmd.cmdadmin.error": "❌ 実行に失敗しました: %s"
+  "mc2cmd.success": "§a✅ コマンドが正常に実行されました: %s",
+  "mc2cmd.error": "§c❌ 実行に失敗しました: %s",
+  "mc2cmd.admin.request": "§6🔓 管理者権限での実行を要求しました: %s",
+  "mc2cmd.rate.limit": "§c⏱️ 実行頻度が高すぎます、しばらくお待ちください",
+  "mc2cmd.whitelist.blocked": "§c🚫 コマンドは許可リストにありません",
+  "mc2cmd.timeout": "§c⏱️ コマンド実行タイムアウト",
+  "mc2cmd.exit.code": "§e⚠️ 実行完了、終了コード: %d"
 }

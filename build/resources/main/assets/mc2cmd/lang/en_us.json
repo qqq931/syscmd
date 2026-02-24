@@ -1,6 +1,9 @@
 {
-  "mc2cmd.cmd.success": "✅ Normal permission executed: %s",
-  "mc2cmd.cmd.error": "❌ Execution failed: %s",
-  "mc2cmd.cmdadmin.success": "✅ Requested admin execution: %s",
-  "mc2cmd.cmdadmin.error": "❌ Execution failed: %s"
+  "mc2cmd.success": "§a✅ Command executed successfully: %s",
+  "mc2cmd.error": "§c❌ Execution failed: %s",
+  "mc2cmd.admin.request": "§6🔓 Requested admin execution: %s",
+  "mc2cmd.rate.limit": "§c⏱️ Rate limit exceeded, please try again later",
+  "mc2cmd.whitelist.blocked": "§c🚫 Command not in whitelist",
+  "mc2cmd.timeout": "§c⏱️ Command execution timeout",
+  "mc2cmd.exit.code": "§e⚠️ Command completed, exit code: %d"
 }

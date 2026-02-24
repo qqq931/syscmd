@@ -1,6 +1,9 @@
 {
-  "mc2cmd.cmd.success": "✅ Eseguito con permessi normali: %s",
-  "mc2cmd.cmd.error": "❌ Esecuzione fallita: %s",
-  "mc2cmd.cmdadmin.success": "✅ Richiesta esecuzione admin: %s",
-  "mc2cmd.cmdadmin.error": "❌ Esecuzione fallita: %s"
+  "mc2cmd.success": "§a✅ Comando eseguito con successo: %s",
+  "mc2cmd.error": "§c❌ Esecuzione fallita: %s",
+  "mc2cmd.admin.request": "§6🔓 Richiesta esecuzione come amministratore: %s",
+  "mc2cmd.rate.limit": "§c⏱️ Frequenza di esecuzione troppo alta, riprova più tardi",
+  "mc2cmd.whitelist.blocked": "§c🚫 Comando non in whitelist",
+  "mc2cmd.timeout": "§c⏱️ Timeout esecuzione comando",
+  "mc2cmd.exit.code": "§e⚠️ Esecuzione completata, codice di uscita: %d"
 }
