@@ -3,7 +3,7 @@ plugins {
     id 'fabric-loom' version '1.14.10'
 }
 
-version = '1.0.0'
+version = '1.1'
 group = 'com.cmd'
 
 // 无需access widener配置
@@ -25,25 +25,24 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
     withSourcesJar()
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
-    options.release = 21
+    options.release = 17
     // 屏蔽过期API警告
     options.compilerArgs.add("-Xlint:-deprecation")
 }
 
-// 关键：删除自定义jar任务，使用loom的remapJar（Fabric模组必须用这个）
-// 让build任务依赖remapJar，生成重映射后的合法jar包
+
 build.dependsOn remapJar
 
-// 可选：设置remapJar的输出名称，方便识别
+
 tasks.named('remapJar') {
-    archiveBaseName = 'mc2cmd'
-    archiveVersion = '1.0.0'
+    archiveBaseName = 'syscmd'
+    archiveVersion = '1.1'
     archiveClassifier = ''
 }
