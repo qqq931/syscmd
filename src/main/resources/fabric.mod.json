@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "syscmd",
-  "version": "1.1",
+  "version": "1.2",
   "icon": "assets/mc2cmd/icon.png",
   "name": "MC2CMD",
-  "description": "在MC中执行系统CMD命令（管理员权限）- 仅限客户端",
+  "description": "在MC中执行系统CMD/PowerShell命令，支持普通/管理员双模式",
   "authors": ["ChenShuo"],
   "license": "MIT",
   "environment": "client",

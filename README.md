@@ -1,45 +1,80 @@
-MC2CMD
-轻量级 Minecraft CMD 执行模组 | Lightweight In-Game CMD Execution Mod
-版本 Version: 1.10.0适用版本 Minecraft: 1.20.1加载器 Loader: Fabric模组体积 Size: 0.01MB多语言支持 Languages: 10 种主流语言 | 10 Mainstream Languages
-简介 | Introduction
-MC2CMD 是一款极致轻量的 Fabric 模组，让你无需退出《我的世界》，即可在游戏内直接执行 Windows CMD 命令，支持普通权限与管理员权限双模式。模组体积不足 0.01MB，加载零延迟，与 100 + 模组共存无冲突，完美适配大型整合包。
-MC2CMD is an ultra-lightweight Fabric mod that allows you to execute Windows CMD commands directly in Minecraft without exiting the game, supporting both normal and administrator permission modes. With a size of less than 0.01MB, it loads instantly, has no conflicts with 100+ mods, and is fully compatible with large modpacks.
-核心功能 | Core Features
-双指令体系：提供普通权限与管理员权限两种执行方式，满足不同操作需求。
-10 国语言适配：游戏内提示语随系统语言自动切换，小众语言默认英文兜底。
-极致轻量：核心代码精简，无冗余资源，不占用额外内存与 CPU，不影响游戏帧率。
-安全转义：自动处理特殊字符（"、&），避免命令执行异常。
-高兼容性：完美适配 Fabric 生态，与各类模组、整合包无冲突。
-支持语言 | Supported Languages
-表格
-语言 Language	代码 Code	语言 Language	代码 Code
-简体中文	zh_cn	德语	de_de
-英语（兜底）	en_us	法语	fr_fr
-日语	ja_jp	西班牙语	es_es
-韩语	ko_kr	葡萄牙语（巴西）	pt_br
-俄语	ru_ru	意大利语	it_it
-指令说明 | Command Usage
-前置要求 | Prerequisite
-需拥有游戏4 级最高权限（服务器端需为管理员，单人模式需开启作弊）。
-1. 普通权限执行 | Normal Permission Execution
-minecraft
-/cmd <你的CMD命令>
-示例 Example：/cmd dir（查看当前目录文件）、/cmd notepad（打开记事本）
-2. 管理员权限执行 | Administrator Permission Execution
-minecraft
-/cmdadmin <你的CMD命令>
-示例 Example：/cmdadmin net stop（停止本地服务）、/cmdadmin chkdsk（磁盘检查）
-安装方法 | Installation
-确保你的游戏已安装 Fabric Loader ≥0.15.0 和 Fabric API；
-将 mc2cmd-1.10.0.jar 放入游戏目录下的 mods 文件夹；
-启动游戏，模组自动加载生效。
-注意事项 | Notes
-3. 
-仅支持 Windows 系统，Linux/Mac 系统暂不兼容；
-管理员权限指令会弹出系统 UAC 授权窗口，需手动确认；
-请谨慎执行高危 CMD 命令（如格式化、删除系统文件），避免造成数据丢失；
-模组仅用于个人学习与自用，服务器端使用请提前告知玩家并做好安全防护。
-开发者 | Developer
-杨晨硕 (YangChenshuo)
-许可证 | License
-MIT License
+syscmd 是一个基于 Fabric 的客户端模组，为游戏内聊天框添加了一套完整的操作系统级命令行接口。安装后，玩家可在 Minecraft 聊天栏中通过 /cmd 系列指令直接查看系统信息、管理进程、浏览与编辑文件、执行系统命令，甚至控制计算机的开关机。
+
+本模组仅限客户端运行，在专用服务器上安装时会自动禁用，不会注册任何命令。所有指令均需要 命令权限等级 4（即开启作弊或为单人世界宿主）方可使用。
+
+/cmd exec <命令> —— 安全执行系统命令，自动对 &、|、<、> 等 Windows CMD 特殊字符添加转义符 ^，防止意外执行复合命令。
+
+/cmd raw <命令> —— 原样执行系统命令，不做任何转义处理，适用于需要管道、重定向等高级用法的场景。
+
+/cmd sysinfo —— 显示操作系统名称与版本、CPU 架构、主机名、核心数、Java 版本、当前用户及工作目录等综合信息。
+
+/cmd mem —— 显示 JVM 堆内存与非堆内存用量，以及通过 WMI 获取的系统物理内存总量与可用量。
+
+/cmd disk —— 列出所有磁盘分区的总容量、可用空间及已用百分比，容量使用率过高时自动变色警告。
+
+/cmd uptime —— 显示 JVM 运行时长（天/时/分）与精确启动时间。
+
+/cmd env [键名] —— 查看全部环境变量（默认显示前 30 项），也可查询指定键名的值。
+
+/cmd net —— 显示主机名、本地 IP 及各网卡接口的 IPv4 地址。
+
+/cmd ping <主机> —— 测试指定主机连通性，返回延迟结果（5 秒超时）。
+
+/cmd ps [关键词] —— 列出当前系统进程（调用 tasklist），支持按名称关键词过滤，最多显示 20 条，每条附带 PID 和内存占用。
+
+/cmd kill <PID> —— ⚠ 危险操作，需二次确认后通过 taskkill /F 强制终止指定 PID 的进程。
+
+/cmd ls [路径] —— 列出指定目录下的文件与子目录，附带文件大小信息。
+
+/cmd cat <路径> —— 读取并显示文件内容，最多展示前 100 行；文件超过 100 KB 时截断提示。
+
+/cmd write <路径> <内容> —— 向指定路径写入文本内容，自动创建父目录(如果没有)，支持 \n 转义为换行。
+
+/cmd del <路径> —— ⚠ 危险操作，需二次确认后删除文件或目录（目录为递归删除）。
+
+/cmd mkdir <路径> —— 创建目录（支持多级嵌套创建）。
+
+/cmd find <路径> <关键词> —— 在指定目录下递归搜索文件名包含关键词的文件，搜索深度限制为 5 层，最多返回 20 条结果。
+
+/cmd open <路径/URL> —— 使用系统默认程序打开文件或网页链接，支持本地路径和 http/https URL。
+
+/cmd clip <文本> —— 将指定文本内容复制到系统剪贴板。
+
+/cmd echo <文本> —— 在聊天框中输出纯文本内容。
+
+/cmd shutdown [秒数] —— ⚠ 危险操作，需二次确认；默认 60 秒后关机，可自定义延时（0–3600 秒）。
+
+/cmd restart [秒数] —— ⚠ 危险操作，需二次确认；默认 60 秒后重启，可自定义延时。
+
+/cmd cancel-shutdown —— 取消已计划的关机或重启任务（调用 shutdown /a）。
+
+/cmd history —— 查看最近执行的系统命令记录，内存中最多保留 20 条。
+
+/cmd clear-history —— 清空命令历史记录。
+
+涉及以下操作时，模组不会立即执行，而是进入 30 秒倒计时确认 阶段：
+
+终止进程（/cmd kill）
+
+删除文件或目录（/cmd del）
+
+定时关机（/cmd shutdown）
+
+定时重启（/cmd restart）
+
+玩家需在倒计时内输入 /cmd confirm 确认执行，或输入 /cmd cancel 取消操作。超时未确认的操作将自动作废。每位玩家的待确认操作相互独立。
+
+所有 /cmd 指令均要求命令权限等级 ≥ 4，即仅在开启作弊的单人世界或拥有 OP 权限的服务端环境中可用。
+
+本模组仅支持 Windows 系统（底层调用 cmd.exe、tasklist、taskkill、shutdown 等 Windows 命令）。
+
+在专用服务器上安装时模组会自动检测并禁用，不注册任何命令。
+
+模组 ID：syscmd
+
+加载器：Fabric
+
+兼容版本： Minecraft Java Edition（Fabric API）
+
+JAVA版本：JAVA17
+
